@@ -1,0 +1,28 @@
+const {
+    SlashCommandBuilder,
+    EmbedBuilder,
+    CommandInteraction
+} = require('discord.js');
+
+const { models, Schema } = require('mongoose');
+const userPermissionSchema = require('../../Models/UserPermissions');
+const SupportStatsSchema = require('../../Models/SupportStats');
+
+module.exports = {
+    data: new SlashCommandBuilder()
+        .setName('smute')
+        .setDescription(`[SUPPORT 3] Permet d'empêcher un utilisateur d'intéragir temporairement.`)
+        .addUserOption((option) =>
+            option
+                .setName('utilisateur')
+                .setDescription('Utilisateur à modifier.')
+                .setRequired(true)
+        )
+        .addStringOption((option) =>
+            option
+                .setName('raison')
+                .setDescription('Raison de la sanction.')
+                .setRequired(true)
+                .setMaxLength(200)
+        )
+}

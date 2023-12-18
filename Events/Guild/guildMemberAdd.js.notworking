@@ -1,0 +1,27 @@
+const { EmbedBuilder, GuildMember } = require("discord.js");
+const welcomeSchema = require("../../Models/Welcome");
+const { model, Schema } = require("mongoose");
+module.exports = {
+  name: "guildMemberAdd",
+  async execute(member) {
+    console.log(member.guild.id);
+    const serverWelcome = await welcomeSchema.findOne({
+      guild: member.guild.id,
+    });
+    if (!serverWelcome) return;
+
+    const welcomeEmbed = new EmbedBuilder()
+      .setTitle("**New member!**")
+      .setDescription(serverWelcome.message)
+      .setColor("Blurple")
+      .addFields({
+        name: "Total members:",
+        value: member.guild.memberCount,
+      })
+      .setTimestamp();
+
+    welcomeChannel.send({ embeds: [welcomeEmbed] });
+
+    member.roles.add(serverWelcome.role);
+  },
+};
