@@ -1,7 +1,7 @@
 const { CommandInteraction, EmbedBuilder } = require("discord.js");
 const { models, Schema } = require("mongoose");
 const BlacklistSchema = require("../../Models/Blacklist");
-
+const { isUserPremium } = require("../../Functions/codeFunction");
 module.exports = {
   name: "interactionCreate",
 
@@ -46,6 +46,22 @@ module.exports = {
         });
         return;
       }
+    }
+
+    const isPremium = await isUserPremium(interaction.user.id);
+
+    if (command.premiumOnly && !isPremium) {
+      const res = new EmbedBuilder()
+        .setTitle("Oups!")
+        .setDescription(
+          `Cette commande est réservé aux utilisateurs Sentinel Premium.`
+        )
+        .setColor("Red")
+        .setTimestamp();
+      return interaction.reply({
+        embeds: [res],
+        ephemeral: true,
+      });
     }
 
     command.execute(interaction, client);
