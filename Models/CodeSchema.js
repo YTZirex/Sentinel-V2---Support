@@ -30,6 +30,4 @@ const codeSchema = new Schema({
   },
 });
 
-const Code = model("Code", codeSchema);
-
-module.exports = { Code };
+module.exports = model("Code", codeSchema);

@@ -1,6 +1,6 @@
-const { Code } = require("../../Models/CodeSchema");
-const { userPermissions } = require("../../Models/UserPermissions");
-const { models, Schema } = require("mongoose");
+const { model, Schema } = require("mongoose");
+const Code = require("../../Models/CodeSchema");
+const userPermissions = require("../../Models/UserPermissions");
 const {
   EmbedBuilder,
   SlashCommandBuilder,

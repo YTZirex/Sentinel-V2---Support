@@ -2,9 +2,9 @@ const {
     SlashCommandBuilder,
     EmbedBuilder
 } = require('discord.js');
-
-const {Code} = require('../../Models/CodeSchema')
-const { userPermissions } = require('../../Models/UserPermissions')
+const { model, Schema } = require("mongoose");
+const Code = require('../../Models/CodeSchema')
+const userPermissions = require('../../Models/UserPermissions')
 const MESSAGES = {
     USER_NOT_PREMIUM: `L'utilisateur n'est pas un membre Sentinel Premium.`
 }

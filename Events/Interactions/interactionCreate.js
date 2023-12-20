@@ -1,7 +1,8 @@
 const { CommandInteraction, EmbedBuilder } = require("discord.js");
 const { models, Schema } = require("mongoose");
 const BlacklistSchema = require("../../Models/Blacklist");
-const { isUserPremium } = require("../../Functions/codeFunction");
+const Code = require('../../Models/CodeSchema');
+//const isUserPremium = require("../../Functions/codeFunction");
 module.exports = {
   name: "interactionCreate",
 
@@ -48,9 +49,11 @@ module.exports = {
       }
     }
 
-    const isPremium = await isUserPremium(interaction.user.id);
+    const userPremiumRecord = await Code.findOne({
+      "redeemedBy.id": interaction.user.id
+    })
 
-    if (command.premiumOnly && !isPremium) {
+    if (command.premiumOnly && !userPremiumRecord) {
       const res = new EmbedBuilder()
         .setTitle("Oups!")
         .setDescription(

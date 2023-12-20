@@ -1,6 +1,8 @@
 const { SlashCommandBuilder, EmbedBuilder } = require("discord.js");
-const { Code } = require("../../Models/CodeSchema");
-const { userPermissions } = require('../../Models/UserPermissions')
+const { model, Schema } = require("mongoose");
+const Code = require("../../Models/CodeSchema");
+const userPermissionSchema = require('../../Models/UserPermissions');
+
 module.exports = {
   data: new SlashCommandBuilder()
     .setName("generate-code")
@@ -26,12 +28,16 @@ module.exports = {
           {
             name: "365 jours",
             value: "annuel",
+          },
+          {
+            name: 'permanent',
+            value: 'permanent'
           }
         )
     ),
   async execute(interaction) {
 
-    const userPermsRecord = await userPermissions.findOne({
+    const userPermsRecord = await userPermissionSchema.findOne({
       user: interaction.user.id,
     });
 
@@ -58,7 +64,7 @@ module.exports = {
 
     try {
       await newCode.save();
-      const res = new EmbedBuilder()
+      const ress = new EmbedBuilder()
         .setTitle("Code généré!")
         .setColor("Green")
         .setDescription(`Votre code a été généré avec succès.`)
@@ -75,7 +81,7 @@ module.exports = {
           }
         )
         .setTimestamp();
-      await interaction.reply({ embeds: [res], ephemeral: true });
+      interaction.reply({ embeds: [ress], ephemeral: true });
     } catch (error) {
       console.error(error);
       const res = new EmbedBuilder()

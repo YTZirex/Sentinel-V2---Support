@@ -1,7 +1,7 @@
 const { SlashCommandBuilder, EmbedBuilder } = require("discord.js");
-
-const { Code } = require("../../Models/CodeSchema");
-const { userPermissions } = require("../../Models/UserPermissions");
+const { model, Schema } = require("mongoose");
+const Code = require("../../Models/CodeSchema");
+const userPermissions = require("../../Models/UserPermissions");
 const ERROR_MESSAGES = {
   CODE_NOT_FOUND: `Le code est invalide. Veuillez réessayer.`,
   EXPIRY_EDIT_FAILED: `La date d'expiration du code n'a pas pu être modifiée. Veuillez réessayer plus tard.`,
@@ -38,6 +38,10 @@ module.exports = {
           {
             name: "365 jours",
             value: 365,
+          },
+          {
+            name: "permanent",
+            value: 1826250
           }
         )
     ),
