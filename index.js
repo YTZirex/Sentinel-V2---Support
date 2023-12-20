@@ -6,6 +6,7 @@ const { User, Message, GuildMember, ThreadMember, Channel} = Partials;
 const { loadEvents } = require('./Handlers/eventHandler');
 const { loadCommands } = require('./Handlers/commandHandler');
 
+const keepAlive = require('./server');
 
 const client = new Client({
     intents: [Guilds, GuildMembers, GuildMessages],
@@ -22,3 +23,5 @@ client.login(client.config.token).then(() => {
     loadEvents(client);
     loadCommands(client);
 });
+
+keepAlive();
