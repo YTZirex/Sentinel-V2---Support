@@ -23,6 +23,7 @@ module.exports = {
     .setDescription(
       "[SUPPORT 4] Permet d'expulser un utilisateur du Serveur Support."
     )
+    .setDMPermission(false)
     .addUserOption((option) =>
       option
         .setName("utilisateur")
