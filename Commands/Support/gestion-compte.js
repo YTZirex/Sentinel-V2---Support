@@ -81,7 +81,7 @@ module.exports = {
             `${target} est un support supérieur ou égal à vous..`
           );
           interaction.reply({
-            embeds: [res],
+            embeds: [resFail],
             ephemeral: true,
           });
           return;
