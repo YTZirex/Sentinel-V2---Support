@@ -58,18 +58,18 @@ module.exports = {
           `Vous n'avez pas la permission d'exécuter cette commmande.`
         );
         interaction.reply({
-          embeds: [res],
+          embeds: [resFail],
           ephemeral: true,
         });
         return;
       }
 
       if (userPermsRecord.supportLevel < 1) {
-        resFail.setTitle(
+        resFailFail.setTitle(
           `Vous n'avez pas la permission d'exécuter cette commmande.`
         );
         interaction.reply({
-          embeds: [res],
+          embeds: [resFail],
           ephemeral: true,
         });
         return;
