@@ -65,7 +65,7 @@ module.exports = {
       }
 
       if (userPermsRecord.supportLevel < 1) {
-        resFailFail.setTitle(
+        resFail.setTitle(
           `Vous n'avez pas la permission d'exécuter cette commmande.`
         );
         interaction.reply({
@@ -94,6 +94,7 @@ module.exports = {
           embeds: [resFail],
           ephemeral: true,
         });
+        return;
       }
 
       const res = new EmbedBuilder()
