@@ -57,7 +57,7 @@ module.exports = {
         resFail.setTitle(
           `Vous n'avez pas la permission d'exécuter cette commmande.`
         );
-        interaction.reply({
+        await interaction.reply({
           embeds: [resFail],
           ephemeral: true,
         });
@@ -68,7 +68,7 @@ module.exports = {
         resFail.setTitle(
           `Vous n'avez pas la permission d'exécuter cette commmande.`
         );
-        interaction.reply({
+        await interaction.reply({
           embeds: [resFail],
           ephemeral: true,
         });
@@ -80,7 +80,7 @@ module.exports = {
           resFail.setTitle(
             `${target} est un support supérieur ou égal à vous..`
           );
-          interaction.reply({
+          await interaction.reply({
             embeds: [resFail],
             ephemeral: true,
           });
@@ -90,7 +90,7 @@ module.exports = {
 
       if (!targetEconomy) {
         resFail.setTitle(`${target} ne possède pas de compte bancaire.`);
-        interaction.reply({
+        await interaction.reply({
           embeds: [resFail],
           ephemeral: true,
         });
@@ -163,10 +163,11 @@ module.exports = {
         )
         .setTimestamp()
         .setThumbnail(target.user.displayAvatarURL());
-        interaction.reply({
+        await interaction.reply({
             embeds: [res],
             ephemeral: true
         })
+        return;
     }
   },
 };
